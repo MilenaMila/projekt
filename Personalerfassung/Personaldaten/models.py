@@ -1,7 +1,7 @@
 from django.db import models
 # from django.urls import reverse
 # from Personalerfassung import settings
-# from datetime import datetime
+from datetime import datetime
 from django.contrib.auth.models import User
 
 
@@ -27,25 +27,24 @@ class Kinder(models.Model):
     SZVS = models.FloatField()
     Familienbonus = models.BooleanField()
     Mitarbeiter = models.ForeignKey("Mitarbeiter",on_delete=models.SET_NULL,null=True)
-#forms.Charfield = Eingabefeld
     def __str__(self): # Neu
          return str(self.id) + " " + self.Vorname # Zeigt in der AdminKonsole die Id und den Vornamen an
 
 class Vordienstzeiten(models.Model): # alles was man für berechnung für vordienstz bracuht , wo er gearbeitet, stundenanzahl, was wielange,
-    Dienstjahre = models.IntegerField(null=False)
+    Dienstjahre = models.IntegerField()
     Wo = models.CharField(max_length=200)
-    Von = models.DateField()
-    Bis = models.DateField()
     Anstellungsart = models.CharField(max_length=200)
-    MitarbeiterID = models.ForeignKey("Mitarbeiter",on_delete=models.SET_NULL,null=True)
-    Vertrag = models.ForeignKey("Vertragstabelle",on_delete=models.SET_NULL,null=True)
+    #MitarbeiterID = models.ForeignKey("Mitarbeiter",on_delete=models.SET_NULL,null=True)
+    MitarbeiterNR = models.ForeignKey("Mitarbeiter",on_delete=models.SET_NULL,null=True)
 
     def __str__(self): # Neu
          return str(self.id) # zeigt in der AdminKonsole die Id an
 
 class Vertragstabelle(models.Model):
     Vertragsart = models.CharField(max_length=200)
-    Gehaltstufe = models.IntegerField(null=True)
+    Gehaltstufe = models.CharField(max_length=2)
+    MitarbeiterID = models.ForeignKey("Mitarbeiter",on_delete=models.SET_NULL,null=True)
+
     def __str__(self): # Neu
          return str(self.id) # zeigt in der AdminKonsole die Id an
 
