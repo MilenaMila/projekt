@@ -10,7 +10,7 @@ class Mitarbeiter(models.Model):
     Vorname = models.CharField(max_length=200) 
     Nachname = models.CharField(max_length=200) 
     Geburtsdatum= models.DateField(default=None, null=True)
-    SZVS = models.FloatField()
+    SZVS = models.IntegerField()
     Kinder = models.IntegerField(default=0) #ändern auf anzahl
     
     def __str__(self): # Neu
@@ -24,7 +24,7 @@ class Kinder(models.Model):
     Vorname = models.CharField(max_length=200) 
     Nachname = models.CharField(max_length=200)
     Geburtsdatum= models.DateField(default=None, null=True) 
-    SZVS = models.FloatField()
+    SZVS = models.IntegerField()
     Familienbonus = models.BooleanField()
     Mitarbeiter = models.ForeignKey("Mitarbeiter",on_delete=models.SET_NULL,null=True)
     def __str__(self): # Neu
@@ -42,7 +42,7 @@ class Vordienstzeiten(models.Model): # alles was man für berechnung für vordie
 
 class Vertragstabelle(models.Model):
     Vertragsart = models.CharField(max_length=200)
-    Gehaltstufe = models.CharField(max_length=2)
+    Gehaltstufe = models.IntegerField()
     MitarbeiterID = models.ForeignKey("Mitarbeiter",on_delete=models.SET_NULL,null=True)
 
     def __str__(self): # Neu
